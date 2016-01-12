@@ -7,6 +7,8 @@ addons:
     packages:
       - sshpass
 
-after_success:
-  - $TRAVIS_TAG == "" && echo "DEV Build"
-  - $TRAVIS_TAG != "" && echo "TAG Build
+deploy:
+  provider: script
+  script: deploy_dev.sh
+  on:
+    tag: false
