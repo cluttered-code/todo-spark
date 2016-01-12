@@ -8,5 +8,5 @@ addons:
       - sshpass
 
 after_success:
-  - $TRAVIS_TAG == "" && echo "DEV"
-  - $TRAVIS_TAG != "" && echo "TAG
+  - if [[ $TRAVIS_TAG == "" ]]; then echo "DEV"; fi
+  - if [[ $TRAVIS_TAG != "" ]]; then echo "TAG"; fi
