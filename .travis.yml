@@ -8,7 +8,11 @@ addons:
       - sshpass
 
 deploy:
-  provider: script
-  script: deploy_dev.sh
-  on:
-    tag: false
+  - provider: script
+    script: deploy_dev.sh
+    on:
+      tags: false
+  - provider: script
+    script: deploy_prod.sh
+    on:
+      tags: true
