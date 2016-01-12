@@ -5,7 +5,10 @@ export SSHPASS=$PASS
 if [[ "$TRAVIS_TAG" == "" ]]
 then
   echo "DEV Build"
-  sshpass -e scp target/todo-spark.jar $USER@$HOST:$PATH -o stricthostkeychecking=no
+  export PATH=$DEV_PATH
 else
   echo "TAG Build"
+  export PATH=$PROD_PATH
 fi
+
+sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$PATH
