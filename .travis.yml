@@ -8,5 +8,7 @@ addons:
       - sshpass
 
 after_success:
-  - if [[ $TRAVIS_TAG == "" ]]; then echo "DEV"; fi
-  - if [[ $TRAVIS_TAG != "" ]]; then echo "TAG"; fi
+  - if [[ $TRAVIS_TAG == "" ]]; then export PATH=$DEV_PATH; fi
+  - if [[ $TRAVIS_TAG != "" ]]; then export PATH=$PROD_PATH; fi
+  - export SSHPASS=$PASS
+  - sshpass -e scp target/todo-spark.jar $USER@$HOST:$PATH
