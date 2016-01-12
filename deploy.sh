@@ -2,8 +2,9 @@
 
 if [[ "$TRAVIS_TAG" == "" ]]
 then
-  export SSHPASS=$DAVID_PASS
-  sshpass -e scp target/todo-spark.jar $DAVID_USER@$DAVID_URL:/home/deploy/todo-spark-dev
+  echo "`ls -l`"
+  echo "`ls -l target/`"
+  sshpass -e scp target/todo-spark.jar $USER@$URL:/home/$USER/todo-spark-dev
 else
   echo "TAG Build"
 fi
