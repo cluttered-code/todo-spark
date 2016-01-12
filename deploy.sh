@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if [[ "$TRAVIS_TAG" == "" ]]
 export SSHPASS=$PASS
+
+if [[ "$TRAVIS_TAG" == "" ]]
 then
-  export destination="$USER@$URL:/home/$USER/todo-spark-dev"
-  echo $destination
-  sshpass -e scp target/todo-spark.jar $destination
+  echo "DEV Build"
+  sshpass -e scp target/todo-spark.jar $USER@$HOST:$PATH -o stricthostkeychecking=no
 else
   echo "TAG Build"
 fi
