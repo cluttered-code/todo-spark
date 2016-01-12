@@ -7,15 +7,9 @@ addons:
     packages:
       - sshpass
 
-after_success:
-  - bash deploy.sh
+#after_success:
+#  - bash deploy.sh
 
-#deploy:
-#  - provider: script
-#    script: deploy.sh
-#    on:
-#      tags: false
-#  - provider: script
-#    script: deploy_prod.sh
-#    on:
-#      tags: true
+deploy:
+  - provider: script
+    script: deploy.sh
