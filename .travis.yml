@@ -7,9 +7,9 @@ addons:
     packages:
       - sshpass
 
-after_sucess:
-  - export PATH=$DEV_PATH
-  - sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$PATH
+after_success:
+  - export SSHPASS=$PASS
+  - sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$DEV_PATH
 
 #after_success:
 #  - bash deploy.sh
