@@ -9,8 +9,7 @@ addons:
 
 after_success:
   - export SSHPASS=$PASS
-  - test "$TRAVIS_TAG" = "" && export PATH=$DEV_PATH
-  - test "$TRAVIS_TAG" != "" && export PATH=$PROD_PATH
+  - if ["$TRAVIS_TAG"]; then export PATH=$PROD_PATH; else export PATH=$DEV_PATH; fi
   - sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$PATH
 
 #after_success:
