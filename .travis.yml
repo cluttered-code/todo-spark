@@ -9,7 +9,7 @@ addons:
 
 deploy:
   provider: script
-  script: scripts/deploy.sh
+  script: deploy.sh
 
 #after_success:
 #  - export SSHPASS=$PASS
