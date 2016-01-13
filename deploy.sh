@@ -2,7 +2,7 @@
 
 export SSHPASS=$PASS
 
-if [[ "$TRAVIS_TAG" == "" ]]
+if [[ "$TRAVIS_TAG" ]]
 then
   echo "DEV Build"
   export PATH=$DEV_PATH
