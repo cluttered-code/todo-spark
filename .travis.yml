@@ -3,6 +3,7 @@ jdk:
   - oraclejdk8
 
 addons:
+  ssh_known_hosts: $HOST
   apt:
     packages:
       - sshpass
@@ -10,7 +11,7 @@ addons:
 after_success:
   - export SSHPASS=$PASS
   - if [[ "$TRAVIS_TAG" == "" ]]; then export PATH=$DEV_PATH; else export PATH=$PROD_PATH fi;
-  - sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$PATH
+  - sshpass -e scp -o target/todo-spark.jar $USER@$HOST:$PATH
 
 #after_success:
 #  - bash deploy.sh
