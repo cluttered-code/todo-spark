@@ -5,6 +5,7 @@ import com.google.inject.multibindings.Multibinder;
 import spark.ResponseTransformer;
 import todo.spark.controller.Routable;
 import todo.spark.controller.TodoController;
+import todo.spark.transformer.JsonTransformer;
 
 /**
  * @author david.clutter@greyrocksoft.com
