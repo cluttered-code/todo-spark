@@ -15,5 +15,6 @@ sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$DE
 
 sshpass -e ssh -f $USER@$HOST << EOF
   cd $DEPLOY_PATH
-  java -jar todo-spark.jar & echo \$! > todo-spark.pid
+  java -jar todo-spark.jar
+  echo \$! > todo-spark.pid
 EOF
