@@ -14,7 +14,8 @@ fi
 sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$DEPLOY_PATH
 sshpass -e ssh $USER@$HOST << EOF
   cd $DEPLOY_PATH
-  java -jar todo-spark.jar &
+  if [[ -e "todo-spark.pid" ]]; then echo "Killing running instance"; kill -TERM $(cat todo-spark.pid); fi
+  eval "(java -jar todo-spark.jar) &"
   \$! > todo-spark.pid
 EOF
 
