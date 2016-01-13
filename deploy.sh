@@ -16,7 +16,7 @@ sshpass -e ssh $USER@$HOST << EOF
   cd $DEPLOY_PATH
   if [[ -e "todo-spark.pid" ]]; then echo "Killing running instance"; kill -TERM $(cat todo-spark.pid); fi
   eval "(java -jar todo-spark.jar) &"
-  \$! > todo-spark.pid
+  echo \$! > todo-spark.pid
 EOF
 
 
