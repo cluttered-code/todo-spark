@@ -15,7 +15,7 @@ after_success:
     else
       export PATH=$PROD_PATH;
     fi;
-    sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$PATH
+  - sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$PATH
 
 #after_success:
 #  - bash deploy.sh
