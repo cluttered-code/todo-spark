@@ -7,14 +7,7 @@ addons:
     packages:
       - sshpass
 
-#after_success:
-#  - export SSHPASS=$PASS
-#  - if [["$TRAVIS_TAG"]]; then export PATH=$PROD_PATH; else export PATH=$DEV_PATH; fi
-#  - sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$PATH
-
 after_success:
-  - source deploy.sh && sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$PATH
-
-#deploy:
-#  - provider: script
-#    script: deploy.sh
+  - export SSHPASS=$PASS
+  - if [["$TRAVIS_TAG" == "" ]]; then export DEPLOY_PATH=$DEV_PATH; else export DEPLOY_PATH=$PROD_PATH; fi
+  - sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$DEPLOY_PATH
