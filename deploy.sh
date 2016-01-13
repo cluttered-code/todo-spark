@@ -5,17 +5,18 @@ export SSHPASS=$PASS
 if [[ "$TRAVIS_TAG" == "" ]]
 then
   echo "DEV Build"
-  export DEPLOY_PATH=$DEV_PATH
+  export TODO_SERVICE=todo-spark-dev
+  export DEPLOY_PATH=/home/$USER/$TODO_SERVICE
 else
   echo "TAG Build"
-  export DEPLOY_PATH=$PROD_PATH
+  export TODO_SERVICE=todo-spark
+  export DEPLOY_PATH=/home/$USER/$TODO_SERVICE
 fi
 
+echo "Sending Jar to $USER@$HOST:$DEPLOY_PATH..."
 sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$DEPLOY_PATH
 
-sshpass -e ssh $USER@$HOST << EOF
-  cd $DEPLOY_PATH
-  java -jar todo-spark.jar &
-  echo \$! > todo-spark.pid
-  exit
+echo "Restart Service..."
+sshpass -e ssh root@$HOST << EOF
+  service $TODO_SERVICE restart
 EOF
