@@ -13,7 +13,7 @@ addons:
 #  - sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$PATH
 
 after_success:
-  - bash deploy.sh
+  - source deploy.sh
   - sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$PATH
 
 #deploy:
