@@ -3,6 +3,7 @@ package todo.spark;
 import com.google.inject.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import spark.Spark;
 import todo.db.TodoDatabase;
 import todo.db.orient.OrientDbModule;
 import todo.spark.controller.Routable;
@@ -18,6 +19,11 @@ public class SparkServer {
     private static final Key<Set<Routable>> ROUTABLE_SET_KEY = Key.get(new TypeLiteral<Set<Routable>>() {});
 
     public static void main(final String[] args) {
+        if(args.length == 0) {
+            final int port = Integer.parseInt(args[0]);
+            Spark.port(port);
+        }
+
         final Injector injector = initializeGuiceInjector();
         injector.getInstance(TodoDatabase.class).initialize();
         initializeRoutes(injector);
