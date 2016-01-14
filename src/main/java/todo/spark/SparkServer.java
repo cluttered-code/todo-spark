@@ -7,6 +7,7 @@ import spark.Spark;
 import todo.db.TodoDatabase;
 import todo.db.orient.OrientDbModule;
 import todo.spark.controller.Routable;
+import todo.spark.filter.Filtering;
 
 import java.util.Set;
 
@@ -17,12 +18,21 @@ public class SparkServer {
 
     private static final Logger LOG = LoggerFactory.getLogger(SparkServer.class);
     private static final Key<Set<Routable>> ROUTABLE_SET_KEY = Key.get(new TypeLiteral<Set<Routable>>() {});
+    private static final Key<Set<Filtering>> FILTERING_SET_KEY = Key.get(new TypeLiteral<Set<Filtering>>() {});
 
     public static void main(final String[] args) {
         setPort(args);
         final Injector injector = initializeGuiceInjector();
         injector.getInstance(TodoDatabase.class).initialize();
         initializeRoutes(injector);
+        initializeFilters(injector);
+    }
+
+    private static void setPort(String[] args) {
+        if(args.length == 1) {
+            final int port = Integer.parseInt(args[0]);
+            Spark.port(port);
+        }
     }
 
     private static Injector initializeGuiceInjector() {
@@ -41,10 +51,8 @@ public class SparkServer {
         routableSet.forEach(Routable::registerRoutes);
     }
 
-    private static void setPort(String[] args) {
-        if(args.length == 1) {
-            final int port = Integer.parseInt(args[0]);
-            Spark.port(port);
-        }
+    private static void initializeFilters(final Injector injector) {
+        final Set<Filtering> filteringSet = injector.getInstance(FILTERING_SET_KEY);
+        filteringSet.forEach(Filtering::enable);
     }
 }

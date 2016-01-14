@@ -5,6 +5,8 @@ import com.google.inject.multibindings.Multibinder;
 import spark.ResponseTransformer;
 import todo.spark.controller.Routable;
 import todo.spark.controller.TodoController;
+import todo.spark.filter.EnableCORS;
+import todo.spark.filter.Filtering;
 import todo.spark.transformer.JsonTransformer;
 
 /**
@@ -17,5 +19,8 @@ public class SparkModule extends AbstractModule {
 
         final Multibinder<Routable> routableBinder = Multibinder.newSetBinder(binder(), Routable.class);
         routableBinder.addBinding().to(TodoController.class);
+
+        final Multibinder<Filtering> filteringBinder = Multibinder.newSetBinder(binder(), Filtering.class);
+        filteringBinder.addBinding().to(EnableCORS.class);
     }
 }
