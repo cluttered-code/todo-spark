@@ -17,10 +17,10 @@ echo "Stop Service..."
 sshpass -e ssh root@$HOST << EOF
   service $TODO_SERVICE stop
 EOF
-
+sleep 5
 echo "Sending Jar to $USER@$HOST:$DEPLOY_PATH..."
 sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$DEPLOY_PATH
-
+sleep 5
 echo "Start Service..."
 sshpass -e ssh root@$HOST << EOF
   service $TODO_SERVICE start

@@ -19,10 +19,12 @@ public class SparkServer {
     private static final Key<Set<Routable>> ROUTABLE_SET_KEY = Key.get(new TypeLiteral<Set<Routable>>() {});
 
     public static void main(final String[] args) {
+        Spark.awaitInitialization();
         final Injector injector = initializeGuiceInjector();
         injector.getInstance(TodoDatabase.class).initialize();
         initializeRoutes(injector);
         setPort(args);
+        Spark.init();
     }
 
     private static Injector initializeGuiceInjector() {
