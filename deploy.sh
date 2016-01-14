@@ -13,10 +13,15 @@ else
   export DEPLOY_PATH=/home/$USER/$TODO_SERVICE
 fi
 
+echo "Stop Service..."
+sshpass -e ssh root@$HOST << EOF
+  service $TODO_SERVICE stop
+EOF
+
 echo "Sending Jar to $USER@$HOST:$DEPLOY_PATH..."
 sshpass -e scp -o stricthostkeychecking=no target/todo-spark.jar $USER@$HOST:$DEPLOY_PATH
 
-echo "Restart Service..."
+echo "Start Service..."
 sshpass -e ssh root@$HOST << EOF
-  service $TODO_SERVICE restart
+  service $TODO_SERVICE start
 EOF
