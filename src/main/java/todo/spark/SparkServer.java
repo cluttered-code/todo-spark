@@ -42,7 +42,7 @@ public class SparkServer {
     }
 
     private static void setPort(String[] args) {
-        if(args.length == 0) {
+        if(args.length == 1) {
             final int port = Integer.parseInt(args[0]);
             Spark.port(port);
         }
