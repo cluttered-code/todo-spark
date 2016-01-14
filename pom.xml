@@ -12,7 +12,7 @@
 
     <groupId>todo</groupId>
     <artifactId>todo-spark</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
 
     <properties>
         <gson.version>2.5</gson.version>
