@@ -1,5 +1,7 @@
 # todo-spark
 
+[![Build Status](https://travis-ci.org/cluttered-code/todo-spark.svg?branch=master)](https://travis-ci.org/cluttered-code/todo-spark)
+
 ## Upstart Service Scripts
 This must be on the server before the service can be updated in devops
 ```bash
